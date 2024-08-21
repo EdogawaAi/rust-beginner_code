@@ -37,4 +37,57 @@ fn main() {
     // println!("random word: {}", secret_word);
 
     // Your code here! :)
+    let mut so_far : String = "-".repeat(secret_word.len());
+    let mut guessed_letters : String = String::new();
+    let mut remaining_guess = NUM_INCORRECT_GUESSES;
+
+    println!("Welcome to CS110L Hangman!");
+
+    while remaining_guess > 0 && so_far.contains('-') {
+        println!("The word so far is {}", so_far);
+        println!("You have guessed the following letters: {}", guessed_letters);
+        println!("You have {} guesses left", remaining_guess);
+
+        print!("Please guess a letter: ");
+        // Make sure the prompt from the previous line gets displayed:
+        io::stdout()
+            .flush()
+            .expect("Error flushing stdout.");
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Error reading line.");
+        let guess_char = guess.trim().chars().next().expect("Please enter a valid character.");
+        println!("{}", guess_char);
+        println!("");
+
+        if guessed_letters.contains(guess_char){
+            println!("You've guessed that char");
+            continue;
+        }
+
+        guessed_letters.push(guess_char);
+
+        if !secret_word_chars.contains(&guess_char){
+            println!("Sorry, that letter is not in the word");
+            remaining_guess -= 1;
+        }
+        else {
+            for (i, &c) in secret_word_chars.iter().enumerate() {
+                if secret_word_chars[i] == guess_char {
+                    so_far.replace_range(i..= i, &guess_char.to_string());
+                }
+            }
+        }
+
+        println!("");
+    }
+
+    if so_far.contains('-'){
+        println!("Sorry, you ran out of guesses!");
+    }
+    else{
+        println!("Congratulations you guessed the secret word: {}!", secret_word);
+    }
+
 }
