@@ -4,6 +4,8 @@ use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
 use nix::unistd::Pid;
 use std::process::{Child, Command};
 use std::os::unix::process::CommandExt;
+use nix::sys::ptrace::getregs;
+use crate::dwarf_data::DwarfData;
 
 pub enum Status {
     /// Indicates inferior stopped. Contains the signal that stopped the process, as well as the
@@ -72,7 +74,40 @@ impl Inferior {
         println!("Killing running inferior (pid {})", self.pid())
     }
 
-    
+    pub fn print_backtrace(&self, debug_data: &DwarfData) -> Result<(), nix::Error> {
+        // println!("hello world");
+        let regs = ptrace::getregs(self.pid())?;
+
+        let mut instruction_ptr = regs.rip as usize;
+        let mut base_ptr = regs.rbp as usize;
+
+        loop {
+            let _func = debug_data.get_function_from_addr(instruction_ptr);
+            let _line = debug_data.get_line_from_addr(instruction_ptr);
+            match (&_func, &_line) {
+                (None, None) => println!("unknown func (source file not found)"),
+                (Some(line), None) => println!("unknown func ({})", line),
+                (None, Some(func)) => println!("{} (source file not found)", func),
+                (Some(func), Some(line)) => println!("{} ({})", func, line),
+            }
+            if let Some(func) = _func {
+                if func == "main" {
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+            instruction_ptr = ptrace::read(self.pid(), (base_ptr + 8) as ptrace::AddressType)? as usize;
+            base_ptr = ptrace::read(self.pid(), base_ptr as ptrace::AddressType)? as usize;
+        }
+
+        // println!("%rip register: {:#x}", instruction_ptr);
+
+        Ok(())
+    }
+
+
 
     /// Returns the pid of this inferior.
     pub fn pid(&self) -> Pid {
