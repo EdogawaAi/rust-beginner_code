@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use nix::sys::ptrace;
 use nix::sys::signal;
 use nix::sys::wait::{waitpid, WaitPidFlag, WaitStatus};
@@ -43,7 +44,7 @@ pub struct Inferior {
 impl Inferior {
     /// Attempts to start a new inferior process. Returns Some(Inferior) if successful, or None if
     /// an error is encountered.
-    pub fn new(target: &str, args: &Vec<String>, breakpoints: &Vec<usize>) -> Option<Inferior> {
+    pub fn new(target: &str, args: &Vec<String>, breakpoints: &mut HashMap<usize, u8>) -> Option<Inferior> {
         // TODO: implement me!
         // println!(
         //     "Inferior::new not implemented! target={}, args={:?}",
@@ -68,21 +69,55 @@ impl Inferior {
         //     Ok(Status::Stopped(signal::Signal::SIGTRAP, _)) => Some(inferior),
         //     _ => None,
         // }
-        match inferior.wait(None) {
-            Ok(Status::Stopped(signal::Signal::SIGTRAP, _)) => {
-                for &bp in breakpoints {
-                    match inferior.write_byte(bp, 0xcc) {
-                        Ok(_) => continue,
-                        Err(_) => println!("Invalid breakpoint address {:#x}", bp),
-                    }
-                }
-                Some(inferior)
+        // match inferior.wait(None) {
+        //     Ok(Status::Stopped(signal::Signal::SIGTRAP, _)) => {
+        //         for &bp in breakpoints {
+        //             match inferior.write_byte(bp, 0xcc) {
+        //                 Ok(_) => continue,
+        //                 Err(_) => println!("Invalid breakpoint address {:#x}", bp),
+        //             }
+        //         }
+        //         Some(inferior)
+        //     }
+        //     _ => None,
+        // }
+        let bps = breakpoints.clone();
+        for bp in bps.keys() {
+            match inferior.write_byte(*bp, 0xcc) {
+                Ok(ori_instr) => {breakpoints.insert(*bp, ori_instr);}
+                Err(_) => println!("Invalid breakpoint address {:#x}", bp),
             }
-            _ => None,
         }
+        Some(inferior)
     }
 
-    pub fn continue_run(&self, signal: Option<signal::Signal>) -> Result<Status, nix::Error> {
+    pub fn continue_run(&mut self, signal: Option<signal::Signal>, breakpoints: &HashMap<usize, u8>) -> Result<Status, nix::Error> {
+       // ptrace::cont(self.pid(), signal)?;
+       // self.wait(None)
+        let mut regs = ptrace::getregs(self.pid())?;
+
+        let mut rip = regs.rip as usize;
+
+        if let Some(ori_instr) = breakpoints.get(&(rip - 1)) {
+            println!("stopped at a breakpoint");
+
+            self.write_byte(rip - 1, *ori_instr).unwrap();
+
+            regs.rip = (rip - 1) as u64;
+
+            ptrace::setregs(self.pid(), regs).unwrap();
+
+            ptrace::step(self.pid(), None).unwrap();
+
+            match self.wait(None).unwrap() {
+                Status::Exited(exit_code) => return Ok(Status::Exited(exit_code)),
+                Status::Signaled(signal) => return Ok(Status::Signaled(signal)),
+                Status::Stopped(_, _) => {
+                    // restore 0xcc in the breakpoint location
+                    self.write_byte(rip - 1, 0xcc).unwrap();
+                }
+            }
+        }
         ptrace::cont(self.pid(), signal)?;
         self.wait(None)
     }
