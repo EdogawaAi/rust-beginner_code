@@ -79,8 +79,10 @@ impl Debugger {
                             Status::Stopped(signal, rip) => // println!("Child stopped by signal {}", signal),
                                 {
                                     println!("Child stopped (signal {})", signal);
-                                    if let Some(line) = self.debug_data.get_line_from_addr(rip) {
-                                        println!("Stopped at {}", line);
+                                    let _line = self.debug_data.get_line_from_addr(rip);
+                                    let _func = self.debug_data.get_function_from_addr(rip);
+                                    if _line.is_some() && _func.is_some() {
+                                        println!("Stopped at {} ({})", _func.unwrap(), _line.unwrap());
                                     }
                                 }
                         }
@@ -121,29 +123,46 @@ impl Debugger {
                     }
                 }
                 DebuggerCommand::Breakpoint(args) => {
-                    if !args.starts_with("*") {
-                        println!("Usage: b|break|breakpoint *address");
+                    let breakpoint_addr;
+                    if args.starts_with("*") {
+                        if let Some(address) = Self::parse_address(&args[1..]) {
+                            breakpoint_addr = address;
+                        }
+                        else {
+                            println!("Invalid address");
+                            continue;
+                        }
+                    }
+                    else if let Some(line) = usize::from_str_radix(&args, 10).ok() {
+                        if let Some(address) = self.debug_data.get_addr_for_line(None, line) {
+                            breakpoint_addr = address;
+                        }
+                        else {
+                            println!("Invalid line number");
+                            continue;
+                        }
+                    }
+                    else if let Some(address) = self.debug_data.get_addr_for_function(None, &args) {
+                        breakpoint_addr = address;
+                    }
+                    else {
+                        println!("Usage: b|break|breakpoint *address|line|func");
                         continue;
                     }
 
-                    if let Some(address) = Self::parse_address(&args[1..]) {
-                        if self.inferior.is_some() {
-                            if let Some(instruction) = self.inferior.as_mut().unwrap().write_byte(address, 0xcc).ok(){
-                                println!("Set breakpoint {} at {:#x}", self.breakpoints.len(), address);
-                                self.breakpoints.insert(address, instruction);
-                            }
-                            else {
-                                println!("Invalid breakpoint address {:#x}", address);
-                            }
+
+                    if self.inferior.is_some() {
+                        if let Some(instruction) = self.inferior.as_mut().unwrap().write_byte(breakpoint_addr, 0xcc).ok(){
+                            println!("Set breakpoint {} at {:#x}", self.breakpoints.len(), breakpoint_addr);
+                            self.breakpoints.insert(breakpoint_addr, instruction);
                         }
                         else {
-                            println!("Set breakpoint {} at {:#x}", self.breakpoints.len(), address);
-                            self.breakpoints.insert(address, 0);
+                            println!("Invalid breakpoint address {:#x}", breakpoint_addr);
                         }
                     }
                     else {
-                        println!("Invalid address");
-                        return;
+                        println!("Set breakpoint {} at {:#x}", self.breakpoints.len(), breakpoint_addr);
+                        self.breakpoints.insert(breakpoint_addr, 0);
                     }
                 }
                 DebuggerCommand::Quit => {
