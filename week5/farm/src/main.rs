@@ -93,18 +93,17 @@ fn main() {
 
     let mut threads = Vec::new();
     for _ in 0..num_threads {
-        let remaining_num_clone = Arc::clone(&remaining_num);
+        let remaining_num_clone = remaining_num.clone();
         threads.push(thread::spawn(move || {
             num_agent(remaining_num_clone);
         }))
     }
 
-    for handle in threads {
-        handle.join().expect("Panic occured in thread!");
-    }
-
 
     // TODO: join all the threads you created
+    for handle in threads {
+        handle.join().expect("Panic occurred in thread!");
+    }
 
     println!("Total execution time: {:?}", start.elapsed());
 }
