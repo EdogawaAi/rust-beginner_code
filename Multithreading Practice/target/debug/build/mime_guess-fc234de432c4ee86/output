@@ -1,0 +1,1 @@
+cargo:rustc-env=MIME_TYPES_GENERATED_PATH=/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs

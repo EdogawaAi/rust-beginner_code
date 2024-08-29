@@ -9,6 +9,36 @@ where
 {
     let mut output_vec: Vec<U> = Vec::with_capacity(input_vec.len());
     // TODO: implement parallel map!
+    let (input_sender, input_receiver) = crossbeam_channel::unbounded();
+    let (output_sender, output_receiver) = crossbeam_channel::unbounded();
+
+    let mut threads = Vec::new();
+    for _ in 0..num_threads {
+        let input_receiver = input_receiver.clone();
+        let output_sender = output_sender.clone();
+        threads.push(thread::spawn(move || {
+            while let Ok ((index, item)) = input_receiver.recv(){
+                let result = f(item);
+                output_sender.send((index, result)).unwrap();
+            }
+        }));
+    }
+
+    for (index, item) in input_vec.into_iter().enumerate() {
+        input_sender.send((index, item)).unwrap();
+    }
+
+    drop(input_sender);
+
+    for _ in 0..output_vec.len() {
+        let (index, result) = output_receiver.recv().unwrap();
+        output_vec[index] = result;
+    }
+
+    for thread in threads {
+        thread.join().expect("Panic occurred in thread");
+    }
+
     output_vec
 }
 

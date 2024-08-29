@@ -1,0 +1,10 @@
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/librand_os-18a381efe6b5645b.rmeta: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/dummy_log.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/random_device.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/linux_android.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/librand_os-18a381efe6b5645b.rlib: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/dummy_log.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/random_device.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/linux_android.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/rand_os-18a381efe6b5645b.d: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/dummy_log.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/random_device.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/linux_android.rs
+
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/lib.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/dummy_log.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/random_device.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/rand_os-0.1.3/src/linux_android.rs:

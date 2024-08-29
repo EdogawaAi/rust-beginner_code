@@ -1,0 +1,12 @@
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/libmime_guess-f3b85c8a82cb78c9.rmeta: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/impl_bin_search.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/mime_types.rs /home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading\ Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/libmime_guess-f3b85c8a82cb78c9.rlib: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/impl_bin_search.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/mime_types.rs /home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading\ Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/mime_guess-f3b85c8a82cb78c9.d: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/impl_bin_search.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/mime_types.rs /home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading\ Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs
+
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/lib.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/impl_bin_search.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/mime_guess-2.0.5/src/mime_types.rs:
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading\ Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs:
+
+# env-dep:MIME_TYPES_GENERATED_PATH=/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/build/mime_guess-fc234de432c4ee86/out/mime_types_generated.rs

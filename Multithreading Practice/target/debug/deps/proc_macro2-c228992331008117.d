@@ -1,0 +1,10 @@
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/libproc_macro2-c228992331008117.rmeta: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/libproc_macro2-c228992331008117.rlib: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/home/hoshino-cola/CodeBlocks/cs110l-spr-2020-starter-code/Multithreading Practice/target/debug/deps/proc_macro2-c228992331008117.d: /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs /home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs
+
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/lib.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/strnom.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/fallback.rs:
+/home/hoshino-cola/.cargo/registry/src/index.crates.io-6f17d22bba15001f/proc-macro2-0.4.30/src/wrapper.rs:
