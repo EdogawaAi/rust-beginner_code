@@ -13,27 +13,27 @@ struct CmdOptions {
     #[clap(
         short,
         long,
-        about = "IP/port to bind to",
+        help = "IP/port to bind to",
         default_value = "0.0.0.0:1100"
     )]
     bind: String,
-    #[clap(short, long, about = "Upstream host to forward requests to")]
+    #[clap(short, long, help = "Upstream host to forward requests to")]
     upstream: Vec<String>,
     #[clap(
         long,
-        about = "Perform active health checks on this interval (in seconds)",
+        help = "Perform active health checks on this interval (in seconds)",
         default_value = "10"
     )]
     active_health_check_interval: usize,
     #[clap(
     long,
-    about = "Path to send request to for active health checks",
+    help = "Path to send request to for active health checks",
     default_value = "/"
     )]
     active_health_check_path: String,
     #[clap(
         long,
-        about = "Maximum number of requests to accept per IP per minute (0 = unlimited)",
+        help = "Maximum number of requests to accept per IP per minute (0 = unlimited)",
         default_value = "0"
     )]
     max_requests_per_minute: usize,
